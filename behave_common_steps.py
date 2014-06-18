@@ -11,8 +11,10 @@ from subprocess import Popen, PIPE
 from behave import step,then
 from gi.repository import GLib, Gio
 import fcntl, os
-from dogtail.rawinput import keyCombo, absoluteMotion, pressKey
+from dogtail.rawinput import keyCombo, click, typeText, absoluteMotion, pressKey
 from dogtail.tree import root
+from iniparse import ConfigParser
+import traceback
 from unittest import TestCase
 
 
@@ -88,7 +90,7 @@ class App(object):
     This class does all basic events with the app
     """
     def __init__(
-        self, appName, shortcut='<Control><Q>', a11yAppName=None,
+        self, appName, desktopFileName = None, shortcut='<Control><Q>', a11yAppName=None,
             forceKill=True, parameters='', recordVideo=False):
         """
         Initialize object App
@@ -107,7 +109,9 @@ class App(object):
         self.a11yAppName = a11yAppName
         self.recordVideo = recordVideo
         self.pid = None
-
+        if desktopFileName is None:
+            desktopFileName = self.appCommand
+        self.desktopFileName = desktopFileName
         # a way of overcoming overview autospawn when mouse in 1,1 from start
         pressKey('Esc')
         absoluteMotion(100, 100, 2)
@@ -132,6 +136,28 @@ class App(object):
                 continue
         raise Exception("10 at-spi errors, seems that bus is blocked")
 
+    def getDashIconPosition(name):
+        """Get a position of miniature on Overview"""
+        over = root.application('gnome-shell').child(name='Overview')
+        button = over[2].child(name=name)
+        (x, y) = button.position
+        (a, b) = button.size
+        return (x + a / 2, y + b / 2)
+    
+    def parseDesktopFile(self):
+        """
+        Getting all necessary data from *.dektop file of the app
+        """
+        cmd = "rpm -qlf $(which %s)" % self.appCommand
+        cmd += '| grep "^/usr/share/applications/.*%s.desktop$"' % self.desktopFileName
+        proc = Popen(cmd, shell=True, stdout=PIPE)
+        # !HAVE TO check if the command and its desktop file exist
+        if proc.wait() != 0:
+            raise Exception("*.desktop file of the app not found")
+        output = proc.communicate()[0].rstrip()
+        self.desktopConfig = ConfigParser()
+        self.desktopConfig.read(output)
+    
     def kill(self):
         """
         Kill the app via 'killall'
@@ -163,8 +189,47 @@ class App(object):
         assert self.isRunning(), "Application failed to start"
         return root.application(self.a11yAppName)
 
-    def startViaMenu(self):
+    def startViaMenu(self, throughCategories = False):
+        self.parseDesktopFile()
+        if self.forceKill and self.isRunning():
+            self.kill()
+            time.sleep(2)
+            assert not self.isRunning(), "Application cannot be stopped"
+        try:
+            gnomeShell = root.application('gnome-shell')
+            pressKey('Super_L')
+            time.sleep(6)
+            if throughCategories:
+                # menu Applications
+                x, y = getDashIconPosition('Show Applications')
+                absoluteMotion(x, y)
+                time.sleep(1)
+                click(x, y)
+                time.sleep(4) # time for all the oversized app icons to appear
+
+                # submenu that contains the app
+                submenu = gnomeShell.child(
+                    name=self.getMenuGroups(), roleName='list item')
+                submenu.click()
+                time.sleep(4)
+
+                # the app itself
+                app = gnomeShell.child(
+                    name=self.getName(), roleName='label')
+                app.click()
+            else:
+                typeText(self.getName())
+                time.sleep(2)
+                pressKey('Enter')
+
+            assert self.isRunning(), "Application failed to start"
+        except SearchError:
+            print("!!! Lookup error while passing the path")
         
+        return root.application(self.a11yAppName)
+
+
+
     def closeViaShortcut(self):
         """
         Close the app via shortcut
@@ -243,7 +308,7 @@ def then_app_is_dead(context, app):
         raise RuntimeError("App '%s' is running" % app)
     except SearchError:
         pass
-##Yet to cleaup the following for weather
+
 def cleanup():
     # Remove cached data and settings
     folders = ['~/.local/share/evolution', '~/.cache/evolution', '~/.config/evolution']
