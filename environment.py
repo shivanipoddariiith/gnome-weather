@@ -24,7 +24,7 @@ def before_all(context):
         config.typingDelay = 0.2
 
         # Include assertion object
-        context.assertion = dummy()
+        #context.assertion = dummy(self)
 
         # Kill initial setup
         os.system("killall /usr/libexec/gnome-initial-setup")

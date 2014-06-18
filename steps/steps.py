@@ -2,7 +2,7 @@
 from behave import step
 
 from dogtail.tree import root
-from behave_common_steps.app import *
+from behave_common_steps import App
 from random import sample
 from behave_common_steps import limit_execution_time_to
 

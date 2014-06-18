@@ -1,0 +1,66 @@
+locked
+Creating logfile at /tmp/dogtail-spoddar/logs/behave_20140615-065205_debug ...
+Feature: General actions # general.feature:1
+
+  @start_via_command
+  Scenario: Start via command       # general.feature:4
+    * Start Weather via command     # behave_common_steps.py:177
+      Traceback (most recent call last):
+        File "/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py", line 1173, in run
+          match.run(runner.context)
+        File "/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py", line 1589, in run
+          self.func(context, *args, **kwargs)
+        File "/home/spoddar/gnome-weather/behave_common_steps.py", line 180, in start_new_weather_instance
+          context.app = context.app_class.startViaCommand()
+        File "/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/runner.py", line 214, in __getattr__
+          raise AttributeError(msg)
+      AttributeError: 'Context' object has no attribute 'app_class'
+      
+      Captured stdout:
+      {'_config': <behave.configuration.Configuration object at 0x11412d0>, '_record': {'scenario': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py', 767, 'run', 'runner.context.scenario = self'), 'tags': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py', 768, 'run', 'runner.context.tags = set(self.effective_tags)'), 'text': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py', 1171, 'run', 'runner.context.text = self.text'), 'app': ('/home/spoddar/gnome-weather/environment.py', 35, 'before_all', "context.app = App('gnome-weather')"), 'stdout_capture': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/runner.py', 415, 'setup_capture', 'self.context.stdout_capture = self.stdout_capture'), 'feature': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py', 433, 'run', 'runner.context.feature = self'), 'log_capture': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/runner.py', 424, 'setup_capture', 'self.context.log_capture = self.log_capture'), 'table': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py', 1172, 'run', 'runner.context.table = self.table'), 'log_start_time': ('/home/spoddar/gnome-weather/environment.py', 33, 'before_all', 'context.log_start_time = strftime("%Y-%m-%d %H:%M:%S", localtime())'), 'stderr_capture': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/runner.py', 419, 'setup_capture', 'self.context.stderr_capture = self.stderr_capture')}, '_runner': <weakproxy at 0x11f3520 to Runner at 0x11f7410>, '_root': {'active_outline': None, 'app': <behave_common_steps.App object at 0x1a5cc50>, 'stdout_capture': <StringIO.StringIO instance at 0x1a567a0>, 'feature': None, 'log_capture': <behave.log_capture.LoggingCapture object at 0x19e20d0>, 'failed': False, 'aborted': False, 'log_start_time': '2014-06-15 06:52:06', 'config': <behave.configuration.Configuration object at 0x11412d0>, 'stderr_capture': <StringIO.StringIO instance at 0x1a660e0>}, '_mode': 'user', '_origin': {'scenario': 'behave', 'tags': 'behave', 'text': 'behave', 'app': 'user', 'stdout_capture': 'behave', 'feature': 'behave', 'log_capture': 'behave', 'table': 'behave', 'log_start_time': 'user', 'stderr_capture': 'behave'}, '_stack': [{'scenario': <Scenario "Start via command">, 'tags': set([u'start_via_command']), 'text': None, 'stdout_capture': <StringIO.StringIO instance at 0x1a66830>, 'log_capture': <behave.log_capture.LoggingCapture object at 0x1b54490>, 'table': None, 'stderr_capture': <StringIO.StringIO instance at 0x1a66878>}, {'feature': <Feature "General actions": 4 scenario(s)>, 'tags': set([])}, {'active_outline': None, 'app': <behave_common_steps.App object at 0x1a5cc50>, 'stdout_capture': <StringIO.StringIO instance at 0x1a567a0>, 'feature': None, 'log_capture': <behave.log_capture.LoggingCapture object at 0x19e20d0>, 'failed': False, 'aborted': False, 'log_start_time': '2014-06-15 06:52:06', 'config': <behave.configuration.Configuration object at 0x11412d0>, 'stderr_capture': <StringIO.StringIO instance at 0x1a660e0>}]}
+
+    Then gnome-weather should start # None
+
+  @start_via_menu
+  Scenario: Start via menu          # general.feature:9
+    * Start Weather via menu        # None
+    Then gnome-weather should start # None
+
+  @quit_via_shortcut
+  Scenario: Ctrl-Q to quit application              # general.feature:14
+    * Start Weather via command                     # behave_common_steps.py:177
+      Traceback (most recent call last):
+        File "/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py", line 1173, in run
+          match.run(runner.context)
+        File "/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py", line 1589, in run
+          self.func(context, *args, **kwargs)
+        File "/home/spoddar/gnome-weather/behave_common_steps.py", line 180, in start_new_weather_instance
+          context.app = context.app_class.startViaCommand()
+        File "/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/runner.py", line 214, in __getattr__
+          raise AttributeError(msg)
+      AttributeError: 'Context' object has no attribute 'app_class'
+      
+      Captured stdout:
+      {'_config': <behave.configuration.Configuration object at 0x11412d0>, '_record': {'scenario': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py', 767, 'run', 'runner.context.scenario = self'), 'tags': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py', 768, 'run', 'runner.context.tags = set(self.effective_tags)'), 'text': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py', 1171, 'run', 'runner.context.text = self.text'), 'app': ('/home/spoddar/gnome-weather/environment.py', 35, 'before_all', "context.app = App('gnome-weather')"), 'stdout_capture': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/runner.py', 415, 'setup_capture', 'self.context.stdout_capture = self.stdout_capture'), 'feature': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py', 433, 'run', 'runner.context.feature = self'), 'log_capture': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/runner.py', 424, 'setup_capture', 'self.context.log_capture = self.log_capture'), 'table': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/model.py', 1172, 'run', 'runner.context.table = self.table'), 'log_start_time': ('/home/spoddar/gnome-weather/environment.py', 33, 'before_all', 'context.log_start_time = strftime("%Y-%m-%d %H:%M:%S", localtime())'), 'stderr_capture': ('/usr/lib/python2.7/site-packages/behave-1.2.4-py2.7.egg/behave/runner.py', 419, 'setup_capture', 'self.context.stderr_capture = self.stderr_capture')}, '_runner': <weakproxy at 0x11f3520 to Runner at 0x11f7410>, '_root': {'active_outline': None, 'app': <behave_common_steps.App object at 0x1a5cc50>, 'stdout_capture': <StringIO.StringIO instance at 0x1a567a0>, 'feature': None, 'log_capture': <behave.log_capture.LoggingCapture object at 0x19e20d0>, 'failed': True, 'aborted': False, 'log_start_time': '2014-06-15 06:52:06', 'config': <behave.configuration.Configuration object at 0x11412d0>, 'stderr_capture': <StringIO.StringIO instance at 0x1a660e0>}, '_mode': 'user', '_origin': {'scenario': 'behave', 'tags': 'behave', 'text': 'behave', 'app': 'user', 'stdout_capture': 'behave', 'feature': 'behave', 'log_capture': 'behave', 'failed': 'behave', 'table': 'behave', 'log_start_time': 'user', 'stderr_capture': 'behave'}, '_stack': [{'scenario': <Scenario "Ctrl-Q to quit application">, 'tags': set([u'quit_via_shortcut']), 'text': None, 'stdout_capture': <StringIO.StringIO instance at 0x1b593f8>, 'log_capture': <behave.log_capture.LoggingCapture object at 0x1b54490>, 'table': None, 'stderr_capture': <StringIO.StringIO instance at 0x1b56b00>}, {'feature': <Feature "General actions": 4 scenario(s)>, 'tags': set([])}, {'active_outline': None, 'app': <behave_common_steps.App object at 0x1a5cc50>, 'stdout_capture': <StringIO.StringIO instance at 0x1a567a0>, 'feature': None, 'log_capture': <behave.log_capture.LoggingCapture object at 0x19e20d0>, 'failed': True, 'aborted': False, 'log_start_time': '2014-06-15 06:52:06', 'config': <behave.configuration.Configuration object at 0x11412d0>, 'stderr_capture': <StringIO.StringIO instance at 0x1a660e0>}]}
+
+    * Press "<Ctrl>q"                               # None
+    Then gnome-weather shouldn't be running anymore # None
+
+  @close_via_gnome_panel
+  Scenario: Close via menu                    # general.feature:20
+    * Start Weather via menu                  # None
+    * Click "Quit" in GApplication menu       # None
+    Then Weather shouldn't be running anymore # None
+
+
+Failing scenarios:
+  general.feature:4  Start via command
+  general.feature:9  Start via menu
+  general.feature:14  Ctrl-Q to quit application
+  general.feature:20  Close via menu
+
+0 features passed, 1 failed, 0 skipped
+0 scenarios passed, 4 failed, 0 skipped
+0 steps passed, 2 failed, 0 skipped, 8 undefined
+Took 0m0.003s
+unlocked
