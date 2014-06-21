@@ -12,7 +12,11 @@ from behave import step,then
 from gi.repository import GLib, Gio
 import fcntl, os
 from dogtail.rawinput import keyCombo, click, typeText, absoluteMotion, pressKey
+<<<<<<< HEAD
 from dogtail.tree import root, SearchError
+=======
+from dogtail.tree import root
+>>>>>>> 7b2ae4d9a106f45f811c1a82119257b7509d7759
 from iniparse import ConfigParser
 import traceback
 from unittest import TestCase
@@ -171,9 +175,12 @@ class App(object):
             # Fall back to killall
             Popen("killall " + self.appCommand, shell=True).wait()
 
+<<<<<<< HEAD
     def getName(self):
         return self.desktopConfig.get('Desktop Entry', 'name')
 
+=======
+>>>>>>> 7b2ae4d9a106f45f811c1a82119257b7509d7759
     def startViaCommand(self):
         """
         Start the app via command
@@ -201,7 +208,11 @@ class App(object):
         try:
             gnomeShell = root.application('gnome-shell')
             pressKey('Super_L')
+<<<<<<< HEAD
             sleep(6)
+=======
+            time.sleep(6)
+>>>>>>> 7b2ae4d9a106f45f811c1a82119257b7509d7759
             if throughCategories:
                 # menu Applications
                 x, y = getDashIconPosition('Show Applications')
@@ -222,6 +233,7 @@ class App(object):
                 app.click()
             else:
                 typeText(self.getName())
+<<<<<<< HEAD
                 sleep(2)
                 pressKey('Enter')
 
