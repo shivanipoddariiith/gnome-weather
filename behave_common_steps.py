@@ -181,7 +181,7 @@ class App(object):
         """
         if self.forceKill and self.isRunning():
             self.kill()
-            time.sleep(2)
+            sleep(2)
             assert not self.isRunning(), "Application cannot be stopped"
 
         #command = "%s %s" % (self.appCommand, self.parameters)
@@ -197,7 +197,7 @@ class App(object):
         self.parseDesktopFile()
         if self.forceKill and self.isRunning():
             self.kill()
-            time.sleep(2)
+            sleep(2)
             assert not self.isRunning(), "Application cannot be stopped"
         try:
             gnomeShell = root.application('gnome-shell')
