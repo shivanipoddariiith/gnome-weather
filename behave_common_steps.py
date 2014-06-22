@@ -16,6 +16,7 @@ from dogtail.tree import root, SearchError
 from iniparse import ConfigParser
 import traceback
 from unittest import TestCase
+import logging
 
 
 # Create a dummy unittest class to have nice assertions
