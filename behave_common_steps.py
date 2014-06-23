@@ -184,8 +184,6 @@ class App(object):
             sleep(2)
             assert not self.isRunning(), "Application cannot be stopped"
 
-        #command = "%s %s" % (self.appCommand, self.parameters)
-        #self.pid = run(command, timeout=5)
         self.process = Popen(self.appCommand.split() + self.parameters.split(),
                              stdout=PIPE, stderr=PIPE, bufsize=0)
         self.pid = self.process.pid
