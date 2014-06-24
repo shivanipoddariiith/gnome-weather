@@ -42,7 +42,6 @@ def add_random_city(context):
 
     assert textentry.text == context.random_city['full'],\
         "Incorrect full city name, expected '%s'" % context.random_city['full']
-
     dialog.button('Add').click()
 
     # A new icon should be added
@@ -92,6 +91,14 @@ def forecast_for_today(context, state):
     label = context.app.instance.child("Forecast for Today")
     assert label.showing == boolean_state
 
+@step(u'Refresh forecast for selected city')
+def refresh_forecast(context):
+    context.app.instance.button("Refresh").click()
+
+@then(u'loading page is visible')
+def loading_page_visible(context):
+    pane = context.app.instance.child(roleName='layered pane')
+    assert pane.label('Loading...')
 
 @step(u'Remove last added city')
 def remove_last_added_city(context):
@@ -101,6 +108,10 @@ def remove_last_added_city(context):
     context.app.instance.button("Delete").click()
     context.app.instance.button("Done").click() 
 
+@step(u'Delete selected cities')
+def delete_selected_cities(context):
+    context.app.instance.button("Delete").click()
+    context.app.instance.button("Done").click() 
 
 @then(u'no cities displayed')
 def no_cities_displayed(context):
@@ -123,3 +134,5 @@ def list_of_cities_is_displayed(context):
     cities_container = pane.child(roleName='icon').parent
 
     assert cities_container.showing, "Cities list is not visible"
+
+    

@@ -24,3 +24,18 @@ Feature: Smoke tests
     * Select added city
     * Return to World Weather
     Then a list of cities is displayed
+
+  @select_all_cities
+  Scenario: Back to world weather
+    * Add random city
+    * Add random city
+    * Press "<Ctrl>a"
+    * Delete selected cities
+    Then no cities displayed
+
+  @refresh_weather
+  Scenario: Back to world weather
+    * Add random city
+    * Select Added city
+    * Refresh forecast for selected city
+    Then loading page is visible
