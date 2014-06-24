@@ -16,6 +16,9 @@ CITIES = [
       'full':    'Albany, New York, United States'},
 ]
 
+@step(u'Press new to add city')
+def press_new_to_add_city(context):
+    context.app.instance.button("New").click()
 
 @step(u'Add random city')
 def add_random_city(context):
@@ -93,7 +96,7 @@ def forecast_for_today(context, state):
 
 @step(u'Refresh forecast for selected city')
 def refresh_forecast(context):
-    context.app.instance.button("Refresh").click()
+    context.app.instance.child(roleName='layered pane').button("Refresh").click()
 
 @then(u'loading page is visible')
 def loading_page_visible(context):

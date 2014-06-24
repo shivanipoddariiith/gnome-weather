@@ -33,9 +33,15 @@ Feature: Smoke tests
     * Delete selected cities
     Then no cities displayed
 
-  @refresh_weather
+  @escape_win_selection
   Scenario: Back to world weather
-    * Add random city
-    * Select Added city
-    * Refresh forecast for selected city
-    Then loading page is visible
+    * Press new to add city
+    * Press "Escape"
+    Then no cities displayed
+
+  #@refresh_weather
+  #Scenario: Back to world weather
+  #  * Add random city
+  #  * Select Added city
+  #  * Refresh forecast for selected city
+  #  Then loading page is visible
