@@ -96,12 +96,13 @@ def forecast_for_today(context, state):
 
 @step(u'Refresh forecast for selected city')
 def refresh_forecast(context):
-    context.app.instance.child(roleName='layered pane').button("Refresh").click()
+    refresh_button = context.app.instance.child("World Weather", roleName="push button").parent[2]
+    refresh_button.click()
 
 @then(u'loading page is visible')
 def loading_page_visible(context):
-    pane = context.app.instance.child(roleName='layered pane')
-    assert pane.label('Loading...')
+    label = context.app.instance.child(roleName="Loading...")
+    assert label.showing()
 
 @step(u'Remove last added city')
 def remove_last_added_city(context):

@@ -39,9 +39,9 @@ Feature: Smoke tests
     * Press "Escape"
     Then no cities displayed
 
-  #@refresh_weather
-  #Scenario: Back to world weather
-  #  * Add random city
-  #  * Select Added city
-  #  * Refresh forecast for selected city
-  #  Then loading page is visible
+  @refresh_weather
+  Scenario: Back to world weather
+    * Add random city
+    * Select Added city
+    * Refresh forecast for selected city
+    Then loading page is visible
